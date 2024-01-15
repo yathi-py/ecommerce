@@ -11,30 +11,11 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
     This permission class checks whether the user making the request is the owner of the object.
     Owners are allowed to perform any request, while other users can only perform safe methods (GET, HEAD, OPTIONS).
-
-    Attributes:
-        - request: The HTTP request object.
-        - view: The Django REST Framework view.
-        - obj: The object being accessed or modified.
-
-    Methods:
-        - has_object_permission(self, request, view, obj): Determines if the user has permission to access or modify the object.
     """
 
     def has_object_permission(self, request, view, obj):
         """
         Check if the requesting user is the owner of the object.
-
-        Args:
-            - request: The HTTP request object.
-            - view: The Django REST Framework view.
-            - obj: The object being accessed or modified.
-
-        Returns:
-            - bool: True if the user has permission, False otherwise.
-
-        Raises:
-            - PermissionDenied: If the user does not have permission.
         """
         owner = get_object_or_404(User, id=obj.user)
 
@@ -53,30 +34,11 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 class IsProductForLoggedInUser(permissions.BasePermission):
     """
     Custom permission to only allow access to the logged-in user.
-
-    This permission class checks whether the user making the request is the same as the owner of the product.
-
-    Attributes:
-        - request: The HTTP request object.
-        - view: The Django REST Framework view.
-
-    Methods:
-        - has_permission(self, request, view): Determines if the user has permission to access the view.
     """
 
     def has_permission(self, request, view):
         """
         Check if the requesting user is the owner of the product.
-
-        Args:
-            - request: The HTTP request object.
-            - view: The Django REST Framework view.
-
-        Returns:
-            - bool: True if the user has permission, False otherwise.
-
-        Raises:
-            - PermissionDenied: If the user does not have permission.
         """
         try:
             owner = User.objects.get(id=request.data.get('user'))

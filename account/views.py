@@ -12,9 +12,6 @@ class RegisterView(generics.GenericAPIView):
     def post(self, request):
         """
         Handles POST requests for user registration.
-
-        :param request: The HTTP request object.
-        :return: A Response object with the serialized user data and HTTP status code.
         """
         user = request.data
         serializer = self.serializer_class(data=user)
@@ -33,9 +30,6 @@ class LoginApiView(generics.GenericAPIView):
     def post(self, request):
         """
         Handles POST requests for user login.
-
-        :param request: The HTTP request object.
-        :return: A Response object with the serialized user data and HTTP status code.
         """
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)

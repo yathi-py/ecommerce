@@ -13,11 +13,6 @@ class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
         """
         Creates and saves a regular user with the given username, email, and password.
-
-        :param username: The username for the new user.
-        :param email: The email address for the new user.
-        :param password: The password for the new user.
-        :return: The created user instance.
         """
         if username is None:
             raise TypeError('User should enter user name')
@@ -32,11 +27,6 @@ class UserManager(BaseUserManager):
     def create_superuser(self, username, email, password=None):
         """
         Creates and saves a superuser with the given username, email, and password.
-
-        :param username: The username for the new superuser.
-        :param email: The email address for the new superuser.
-        :param password: The password for the new superuser.
-        :return: The created superuser instance.
         """
         if password is None:
             raise TypeError('Password cant be none')
@@ -71,16 +61,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         """
         Returns a string representation of the User instance.
-
-        :return: The email of the user.
         """
         return self.email
 
     def tokens(self):
         """
         Generates and returns authentication tokens for the user.
-
-        :return: A dictionary containing the refresh and access tokens.
         """
         refresh = RefreshToken.for_user(self)
         return {

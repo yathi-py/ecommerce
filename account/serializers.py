@@ -18,9 +18,6 @@ class RegisterSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         """
         Custom validation method to ensure the username is alphanumeric.
-
-        :param attrs: The dictionary of field values to validate.
-        :return: The validated attributes.
         """
         email = attrs.get("email", '')
         username = attrs.get("username", '')
@@ -33,9 +30,6 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """
         Creates and returns a new user instance using the provided validated data.
-
-        :param validated_data: The validated data for creating a new user.
-        :return: The created user instance.
         """
         return User.objects.create_user(**validated_data)
 
@@ -58,10 +52,6 @@ class LoginSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         """
         Custom validation method to authenticate the user based on provided email and password.
-
-        :param attrs: The dictionary of field values to validate.
-        :return: The validated attributes.
-        :raises AuthenticationFailed: If authentication fails due to invalid credentials or inactive/ unverified user.
         """
         email = attrs.get('email', '')
         password = attrs.get('password', '')
