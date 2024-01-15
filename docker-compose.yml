@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    networks:
+      - mynetwork
+    env_file: .env
+    command: ["/app/docker-entrypoint.sh", "postgres:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
+  postgres:
+    build:
+      context: .
+      dockerfile: postgres/Dockerfile
+    image: postgres:latest
+    container_name: accounts
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+    env_file: .env
+
+volumes:
+  postgres_data:
+
+networks:
+  mynetwork:

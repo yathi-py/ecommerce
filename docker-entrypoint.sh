@@ -9,13 +9,13 @@ wait_for_postgres() {
   done
 }
 # Function to check if MongoDB is ready
-wait_for_mongodb() {
-  until nc -z -v -w30 mongodb 27017
-  do
-    echo "Waiting for MongoDB to be ready..."
-    sleep 1
-  done
-}
+#wait_for_mongodb() {
+#  until nc -z -v -w30 mongodb 27017
+#  do
+#    echo "Waiting for MongoDB to be ready..."
+#    sleep 1
+#  done
+#}
 
 # Function to apply Django migrations
 apply_migrations() {
@@ -30,7 +30,7 @@ start_gunicorn() {
 
 # Wait for database to be ready
 wait_for_postgres
-wait_for_mongodb
+#wait_for_mongodb
 
 # Apply Django migrations
 apply_migrations

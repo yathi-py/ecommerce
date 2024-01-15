@@ -17,6 +17,3 @@ EXPOSE 8000
 ENV DJANGO_SETTINGS_MODULE=ecommerce.settings
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-
-# Run the entrypoint script
-CMD ["/app/docker-entrypoint.sh"]

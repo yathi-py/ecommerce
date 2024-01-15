@@ -8,3 +8,4 @@ ALTER USER postgres CREATEDB;
 
 -- Create a database and set the user as the owner
 CREATE DATABASE accounts WITH OWNER = postgres;
+GRANT ALL PRIVILEGES ON DATABASE accounts TO postgres;
